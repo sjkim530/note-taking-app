@@ -9,10 +9,14 @@ function addNote(e) {
   let newNote = document.createElement("div");
   newNote.className = "my-note";
   newNote.innerHTML = `
-  <button type="button">X</button>
+  <button type="button" onclick=deleteNote(this.parentNode)>X</button>
   <p> ${input.value} </p>
   <button type="button">Edit</button>
   `;
   myNotes.appendChild(newNote);
   input.value = "";
+}
+
+function deleteNote(note) {
+  note.remove();
 }
