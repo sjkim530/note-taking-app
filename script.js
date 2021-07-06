@@ -10,6 +10,10 @@ form.addEventListener("submit", (e) => {
     return alert(
       "You are allowed max 36 notes. Please delete notes to add more notes!"
     );
+  } else if (!input.value.trim()) {
+    e.preventDefault();
+    input.value = "";
+    return alert("Invalid input. Please try again");
   } else {
     addNote(e);
   }
