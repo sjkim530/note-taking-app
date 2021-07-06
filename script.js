@@ -1,7 +1,7 @@
 const form = document.querySelector("form");
 const input = document.querySelector("input");
-const myNotes = document.getElementById("my-notes");
-let borderedNote = false;
+const myNotes = document.getElementById("my-notes-container");
+let borderedNote = null;
 
 form.addEventListener("submit", addNote);
 
@@ -25,6 +25,7 @@ function addNote(e) {
 
 function deleteNote(note) {
   note.remove();
+  borderedNote = null;
 }
 
 // Edit the note when you click on the "Edit" button
@@ -46,15 +47,17 @@ function editNote(note) {
 function swapNotes(note) {
   if (!borderedNote) {
     borderedNote = note;
-    note.parentNode.style.border = "solid red";
+    note.style.border = "solid red";
   } else if (borderedNote === note) {
     borderedNote = null;
-    note.parentNode.style.border = "none";
+    note.style.border = "none";
   } else {
-    const prevNoteCopy = note.parentNode.previousSibling;
+    const afterNoteNode = note.nextElementSibling;
+    const parent = note.parentNode;
     borderedNote.replaceWith(note);
-    prevNoteCopy.after(borderedNote);
-    note.parentNode.style.border = "none";
+    parent.insertBefore(borderedNote, afterNoteNode);
+    note.style.border = "none";
+    borderedNote.style.border = "none";
     borderedNote = null;
   }
 }
