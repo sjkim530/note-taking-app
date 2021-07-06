@@ -1,6 +1,7 @@
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 const myNotes = document.getElementById("my-notes");
+let borderedNote = false;
 
 form.addEventListener("submit", addNote);
 
@@ -9,17 +10,18 @@ form.addEventListener("submit", addNote);
 function addNote(e) {
   e.preventDefault();
   let newNote = document.createElement("div");
-  newNote.className = "my-note";
-  newNote.innerHTML = `
-  <button type="button" onclick=deleteNote(this.parentNode)>X</button>
+  newNote.className = "parent-note";
+  newNote.innerHTML = `<div class="my-note" onclick=swapNotes(this)>
+  <button type="button" onclick=deleteNote(this.parentNode.parentNode)>X</button>
   <p> ${input.value} </p>
-  <button type="button" onclick=editNote(this.parentNode)>Edit</button>
+  <button type="button" onclick=editNote(this.parentNode.parentNode)>Edit</button>
+  </div>
   `;
   myNotes.appendChild(newNote);
   input.value = "";
 }
 
-// Deletes the note when you click on the "X" button
+// Delete the note when you click on the "X" button
 
 function deleteNote(note) {
   note.remove();
@@ -35,4 +37,24 @@ function editNote(note) {
       edit.contentEditable = false;
     }
   });
+}
+
+// Selects the note when you click on the note.
+// If same note is clicked, the note is deselected
+// Else, swap notes
+
+function swapNotes(note) {
+  if (!borderedNote) {
+    borderedNote = note;
+    note.parentNode.style.border = "solid red";
+  } else if (borderedNote === note) {
+    borderedNote = null;
+    note.parentNode.style.border = "none";
+  } else {
+    const prevNoteCopy = note.parentNode.previousSibling;
+    borderedNote.replaceWith(note);
+    prevNoteCopy.after(borderedNote);
+    note.parentNode.style.border = "none";
+    borderedNote = null;
+  }
 }
