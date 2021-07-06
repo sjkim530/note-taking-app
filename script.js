@@ -3,7 +3,17 @@ const input = document.querySelector("input");
 const myNotes = document.getElementById("my-notes-container");
 let borderedNote = null;
 
-form.addEventListener("submit", addNote);
+form.addEventListener("submit", (e) => {
+  if (myNotes.childNodes.length === 36) {
+    e.preventDefault();
+    input.value = "";
+    return alert(
+      "You are allowed max 36 notes. Please delete notes to add more notes!"
+    );
+  } else {
+    addNote(e);
+  }
+});
 
 // Creates a new note
 
@@ -12,7 +22,9 @@ function addNote(e) {
   let newNote = document.createElement("div");
   newNote.className = "parent-note";
   newNote.innerHTML = `<div class="my-note" onclick=swapNotes(this)>
-  <button type="button" onclick=deleteNote(this.parentNode.parentNode)>X</button>
+  <div class="x-btn-container">
+  <button type="button" class="x-button" onclick=deleteNote(this.parentNode.parentNode)>X</button>
+  </div>
   <p> ${input.value} </p>
   <button type="button" onclick=editNote(this.parentNode.parentNode)>Edit</button>
   </div>

@@ -1,3 +1,77 @@
+body {
+  background-color: #fffde7;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+.input-container {
+  border-style: solid;
+  border-width: 1.5px;
+  height: 2.5em;
+  width: 500px;
+}
+
+.input-master {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
 .my-note {
-  color: blue;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: auto;
+  margin: 20px 10px 20px 10px;
+  background-color: #ffff00;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.my-note p {
+  width: 150px;
+  word-wrap: break-word;
+}
+
+.my-notes-master {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.note-input {
+  border: none;
+  font-size: 1.5em;
+  width: 496px;
+  height: 37px;
+}
+
+.x-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.x-button {
+  height: 25px;
+  width: 25px;
+}
+
+#my-notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1160px;
 }
